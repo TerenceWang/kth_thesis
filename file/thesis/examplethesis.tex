@@ -1,0 +1,89 @@
+\documentclass{kththesis}
+
+\usepackage{blindtext} % This is just to get some nonsense text in this template, can be safely removed
+
+\usepackage{csquotes} % Recommended by biblatex
+\usepackage{biblatex}
+\addbibresource{references.bib} % The file containing our references, in BibTeX format
+
+
+\title{This is the English title}
+\alttitle{Detta är den svenska översättningen av titeln}
+\author{Osquar Student}
+\email{osquar@kth.se}
+\supervisor{Lotta Larsson}
+\examiner{Lennart Bladgren}
+\programme{Master in Computer Science}
+\school{School of Computer Science and Communication}
+\date{\today}
+
+
+\begin{document}
+
+% Frontmatter includes the titlepage, abstracts and table-of-contents
+\frontmatter
+
+\titlepage
+
+\begin{abstract}
+  English abstract goes here.
+
+  \blindtext
+\end{abstract}
+
+
+\begin{otherlanguage}{swedish}
+  \begin{abstract}
+    Träutensilierna i ett tryckeri äro ingalunda en oviktig faktor,
+    för trevnadens, ordningens och ekonomiens upprätthållande, och
+    dock är det icke sällan som sorgliga erfarenheter göras på grund
+    af det oförstånd med hvilket kaster, formbräden och regaler
+    tillverkas och försäljas Kaster som äro dåligt hopkomna och af
+    otillräckligt.
+  \end{abstract}
+\end{otherlanguage}
+
+
+\tableofcontents
+
+
+% Mainmatter is where the actual contents of the thesis goes
+\mainmatter
+
+
+\chapter{Introduction}
+
+We use the \emph{biblatex} package to handle our references.  We therefore use the
+command  to get a reference in parenthesis, like this
+\parencite{heisenberg2015}.  It is also possible to include the author
+as part of the sentence using \texttt{textcite}, like talking about
+the work of.
+
+\Blindtext
+\section{Background}
+
+\section{Research Question}
+% \blindtext
+
+
+\chapter{Related work}
+
+There are mainly two directions in deep domain adaptation:
+One direction is to minimize the difference between the source and target domain. And the other direction is to use adversarial loss to modify the discriminative representation space. 
+
+
+\cite{ganin2015unsupervised,ganin2016domain} proposed a model in feature-leveled domain adaptation by using the adversarial method \cite{goodfellow2014generative}: Domain-adversarial Neural Network (DANN). This model contains three parts: a feature extractor used to extract the feature from the input images, a label classifier used to predict the class label and a domain classifier used to classify the domain label. On one hand, the loss function of the domain classifier needs to be minimized in order to correctly distinguish the source and target domain. On the other hand, to find the domain invariant feature, the loss function of the domain classifier needs to be maximized. By formulating such a min-max game, DANN find a common feature space between the source and target. And there are some variants based on DANN. \cite{tzeng2015simultaneous} considered the similarity between the classes, and proposed the soft label loss. \cite{tzeng2017adversarial} used untied weight mapping in feature extractor and reduce the difficult in optimization. However, all these approaches is based on feature level and started with a feature extractor layer, which does not enforce any semantic consistency\cite{hoffman2017cycada}. 
+
+
+
+\chapter{Methods}
+
+\blindtext
+
+\printbibliography[heading=bibintoc] % Print the bibliography (and make it appear in the table of contents)
+
+\appendix
+
+\chapter{Unnecessary Appended Material}
+
+\end{document}
