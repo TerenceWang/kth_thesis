@@ -65,17 +65,17 @@
 % \blindtext
 \chapter{Background}
 \section{Transfer Learning}
-Machine learning has been quite successful in recent years. However, many machine learning methods are based on a common assumption: the training data and the testing data are sampled from a same distribution. When they come from a different distribution, or the distribution changed, the trained model's performance will dramatically decrease. Transfer learning aims to solve this problem, which will transfer the knowledge learned from the original distribution to the new one. Here is how we define the transfer learning in a notation form\cite{pan2010survey}:
+Machine learning has been quite successful in recent years. However, many machine learning methods are based on a common assumption: the training data and the testing data are sampled from a same distribution. When they come from different distributions, or the distribution changed, the trained model's performance will dramatically decrease. Transfer learning aims to solve this problem, which will transfer the knowledge learned from the original distribution to the new one. Here is how we define the transfer learning in a notation form\cite{pan2010survey}:
 
-\noindent Firstly, let's define \emph{domain}, a \emph{domain} D contains two parts: a feature space  $\mathcal{X}$, a marginal probability distribution $P(X)$. And $X = \{x_1,x_2,x_3,...,x_n\}$, where $x_i \in \mathcal{X}$. 
+\noindent Firstly, let's define domain, a domain D contains two parts: a feature space  $\mathcal{X}$, a marginal probability distribution $P(X)$. And $X = \{x_1,x_2,x_3,...,x_n\}$, where $x_i \in \mathcal{X}$. 
 
-\noindent Then, when given a domain $D = \{\mathcal{X}, P(X)\}$, a \emph{task} $\mathcal{T}$ is defined as $\mathcal{T} = \{\mathcal{Y},P(Y|X)\}$, where $\mathcal{Y}$ is the label space, and $Y = \{y_1,y_2,y_3,...,y_n\}$, where $y_i \in \mathcal{Y}$. And $P(Y|X)$ means the conditional probability, actually it is an objective predictive function. When given features $X$, our aim is to find the most possible labels $Y$. In the actually work, we need to find an approximate representation of $P(Y|X)$, which is also the goal of machine learning.
+\noindent Then, when given a domain $D = \{\mathcal{X}, P(X)\}$, a task $\mathcal{T}$ is defined as $\mathcal{T} = \{\mathcal{Y},P(Y|X)\}$, where $\mathcal{Y}$ is the label space, and $Y = \{y_1,y_2,y_3,...,y_n\}$, where $y_i \in \mathcal{Y}$. And $P(Y|X)$ means the conditional probability, actually it is an objective predictive function. When given features $X$, our aim is to find the most possible labels $Y$. In the actually work, we need to find an approximate representation of $P(Y|X)$, which is also the goal of machine learning.
 
 \noindent Finally, we can define the transfer learning: given source and target domains $D_S$ and $D_T$, then source and target tasks $\mathcal{T}_S$ and $\mathcal{T}_T$. Transfer learning aims to help improve the performance of $P_T(Y|X)$ in $\mathcal{T}_T$ by using the knowledge learned from $D_S$ and $\mathcal{T}_S$, where $D_S \neq D_T$ or $\mathcal{T}_S \neq \mathcal{T}_T$.
 
 \noindent As we have mentioned that in transfer learning, $D_S \neq D_T$ or $\mathcal{T}_S \neq \mathcal{T}_T$, so the source and target conditions can vary in the following four ways:
 \begin{itemize}
-    \item $\mathcal{X}_S \neq \mathcal{X}_T$. The target and source domain has different feature space, for example, two documents are written in different language, which will bring different feature space. 
+    \item $\mathcal{X}_S \neq \mathcal{X}_T$. The target and source domain have different feature space, for example, two documents are written in different language, which will bring different feature space. 
     \item $P_T(X) \neq P_S(X)$. The marginal probability distributions of source and target domain are different. The source and target features are sampled from different distribution. This scenario is called domain adaptation, which is the main focus in our paper. 
     \item $\mathcal{Y}_T \neq \mathcal{Y}_S$. The label space are different. In the actually application of transfer learning, this scenario is rare. 
     \item $P_T(Y|X) \neq P_S(Y|X)$. The conditional probability distributions of source and target are different. This scenario is also very common. But we do not focus on this problem in our project.
@@ -86,7 +86,7 @@ Machine learning has been quite successful in recent years. However, many machin
 Domain adaptation is one of the sub questions of transfer learning. Domain adaptation tried to build a model which is suitable on both source and target domain. The notation definition is:  given source and target domains $D_S$ and $D_T$, then source and target tasks $\mathcal{T}_S$ and $\mathcal{T}_T$. Domain adaptation aims to help improve the performance of $P_T(Y|X)$ in $\mathcal{T}_T$ by using the knowledge learned from $D_S$ and $\mathcal{T}_S$, where $P_S(X) \neq P_T(X)$ and $P_S(Y|X) \approx P_T(Y|X)$.
 
 \paragraph{Covariate shift}~{}\\
-Shimodaira et al.\cite{shimodaira2000improving} first proposed the concept of covariate shift, which is an important concept in domain adaptation. As we have already know that the source and target task's conditional probability distribution are same, then the difference between these two domains is called covariate shift. Shimodaira et al.\cite{shimodaira2000improving} defined \emph{misspecified} models to indicate the influence of covariate shift in model training. Although $P_S(Y|X) \approx P_T(Y|X)$ appears sweet, in the real world application, what we usually find is $P(Y|X,\theta)$. We optimize the parameter $\theta$ to minimize the expected classification error. But it is hard to find a parameter $\theta^*$ which could fit $P(Y|X,\theta^*) = P(Y|X)$ for all $x \in \mathcal{X}$. So the model $P(Y|X,\theta^*)$ we find is called a \emph{misspecified} model. The model's parameter $\theta^*$ is depend on $P(X)$. The difference between $P_S(X)$ and $P_T(X)$ will bring the difference between the model trained from source domain and the one from the target domain. 
+Shimodaira et al.\cite{shimodaira2000improving} first proposed the concept of covariate shift, which is an important concept in domain adaptation. As we have already know that the source and target task's conditional probability distribution are same, then the difference between these two domains is called covariate shift. Shimodaira et al.\cite{shimodaira2000improving} defined misspecified models to indicate the influence of covariate shift in model training. Although $P_S(Y|X) \approx P_T(Y|X)$ appears sweet, in the real world application, what we usually find is $P(Y|X,\theta)$. We optimize the parameter $\theta$ to minimize the expected classification error. But it is hard to find a parameter $\theta^*$ which could fit $P(Y|X,\theta^*) = P(Y|X)$ for all $x \in \mathcal{X}$. So the model $P(Y|X,\theta^*)$ we find is called a misspecified model. The model's parameter $\theta^*$ is depend on $P(X)$. The difference between $P_S(X)$ and $P_T(X)$ will bring the difference between the model trained from source domain and the one from the target domain. 
 
 \paragraph{Single Good Hypothesis}~{}\\
 We usually believe that there exists a model or hypothesis $H^*$, making the error on source domain $E_S(H^*)$ and the error on target domain $E_T(H^*)$ are both small. 
@@ -100,12 +100,12 @@ Domain discrepancy is used to describe the difference between the source and tar
 The goal of generative model is finding a function used to approximate fit the distribution of the original data. If we use $f(X;\Theta)$ represents such a function, so finding the parameter $P(\Theta)$ is a process of maximum likelihood estimation. The question is when the data distribution is complex, our $f$ will also be complex. And deep neural network could be used to represent such a complex function. There are two successful frameworks used to build a generative model: variational auto-encoder(VAE) and Generative Adversarial Network(GAN). In this project we mainly focus on the GAN. 
 
 \subsection{Variational Autoencoders}
-Variational Autoencoders\cite{kingma2013auto,doersch2016tutorial}(VAE) is designed based on encoder-decoder structure. Usually we will have a observed data x, for example an image and this observed data is generated by a latent code z. So training a encoder is trying to find a $q_{\phi}(z|x)$ and training a decoder is trying to find a $p_{\theta}(x|z)$. The training goal of the VAE is to maximize the following likelihood function:
+Variational Autoencoders\cite{kingma2013auto,doersch2016tutorial}(VAE) is based on encoder-decoder structure. Usually we will have a observed data x, for example an image and this observed data is generated by a latent code z. So training a encoder is trying to find a $q_{\phi}(z|x)$ and training a decoder is trying to find a $p_{\theta}(x|z)$. The training goal of the VAE is to maximize the following likelihood function:
 \begin{equation}
     \log_{\theta}(x^{(1)},x^{(2)},...,x^{(N)}) = \sum_{i=1}^{N}\log p_\theta(x^{(i)})
 \end{equation}
 
-Now we can use the $q_{\phi}(z|x^{(i)})$ to approach the posterior of $p_{\theta}(z|x^{(i)})$. To estimate the similarity between these two distribution, we use Kullback-Leibler divergence to describe it.
+Now we can use the $q_{\phi}(z|x^{(i)})$ to approach the posterior  $p_{\theta}(z|x^{(i)})$. To estimate the similarity between these two distribution, we use Kullback-Leibler divergence to describe it.
 
 \begin{eqnarray}
 KL(q_{\phi}(z|x^{(i)})||p_{\theta}(z|x^{(i)})) &=& \mathbb{E}_{q_{\phi}(z|x^{(i)})} \log \frac{q_{\phi}(z|x^{(i)})}{p_{\theta}(z|x^{(i)})} \nonumber \\
@@ -127,11 +127,11 @@ This is a basic equation of VAE. And $KL(q_{\phi}(z|x^{(i)})||p_{\theta}(z|x^{(i
 \end{equation}
 instead of $\sum_{i=1}^N p_\theta(x^{(i)})$.
 
-The first term could be optimized by stochastic gradient descent and using minibatch training samples. This term could be viewed as reconstruction error by using L2 loss. And the second term similarly, $p(z)$ could be viewed as a normal distribution $N(0,1)$, and the encoder $q_{\phi}(z|x)$'s output is the mean and the variance of the normal distribution want to approximate. The training process could also be done by backpropagate algorithm. 
+The first term could be optimized by stochastic gradient descent and using minibatch training samples. This term could be viewed as reconstruction error by using L2 loss. And in the second term similarly, $p(z)$ could be viewed as a normal distribution $N(0,1)$,  the encoder $q_{\phi}(z|x)$'s output is the mean and the variance of the normal distribution wanted to approximate. The training process could also be done by backpropagate algorithm. 
 
-Variational Autoencoders is quite efficient in generating samples, while VAE usually tend to result in blurry images\cite{doersch2016tutorial} because of the pixel-wise reconstruction losses.
+\noindent Variational Autoencoders is quite efficient in generating samples, while VAE usually tend to result in blurry images\cite{doersch2016tutorial} because of the pixel-wise reconstruction losses.
 \subsection{Generative Adversarial Network}
-Generative Adversarial Network(GAN) was proposed by Ian Goodfellow\cite{goodfellow2014generative} inspired from two-player game. The role of this two player in GAN is generative model and discriminative model. Following graph shows the structure of GAN.
+Generative Adversarial Network(GAN) was proposed by Ian Goodfellow\cite{goodfellow2014generative} inspired from two-players game. The roles of this two players in GAN are generative model and discriminative model. Following graph shows the structure of GAN.
 
 \begin{figure}[H]
     \centering
@@ -171,7 +171,7 @@ Semantic segmentation is understanding an image at pixel level, for example we w
 
 \chapter{Related work}
 
-
+This chapter reviews recent works in adversarial domain adaptation and also introduces some recent works in deep semantic segmentation. 
 % There are mainly two directions in deep domain adaptation:
 % One direction is to minimize the difference between the source and target domain. And the other direction is to use adversarial loss to modify the discriminative representation space. 
 \section{Adversarial Domain Adaptation}
@@ -191,7 +191,7 @@ The proposed of GAN\cite{goodfellow2014generative} has provided domain adaptatio
 
 \noindent Finding a mapping function or a function or a domain invariant representation, which in principle, is a good idea. \cite{bousmalis2016domain} thinks that these methods will be affected by the different distribution in low level. So Domain Separation Network(DSN) was proposed. DSN not only extract the domain invariant feature but also extract the identity feature of the source and target domain, which could be viewed as the low level features. And from the authors point of view, the invariant feature subspace show be orthogonal with the identity subspace. Also this paper adopted MMD\cite{gretton2012kernel} method and gradient reversal layer\cite{ganin2015unsupervised,ganin2016domain} to train the invariant feature extractor. 
 
-\noindent However, all these approaches is based on feature level and started with a feature extractor layer, which does not enforce any semantic consistency\cite{hoffman2017cycada}. 
+\noindent However, all these approaches are based on feature level, do not enforce any semantic consistency\cite{hoffman2017cycada}. 
 
 \subsection{Pixel-Level Adaptation}
 
@@ -199,7 +199,7 @@ Pixel-Level domain adaptation is usually combined with image generation or style
 
 \paragraph{PixelDT}~{}\\
 
-\noindent Yoo\cite{yoo2016pixel} studied the domain transfer problem. They tried to achieve a domain transfer of clothes on semantic level. They build a three levels network. The first level is called convert, which is build by an encoder and a decoder. Encoder firstly extract the low-level semantic information of a source picture, and the decoder decode this information into another picture. Actually, the encoder is a convolutional neural network, and we will use the second and third level network to train the decoder. The second level is a real/fake discriminator and the third level is a domain discriminator. The decoder tried to confuse the real/fake discriminator, making the decoder result look natural and it tried to confuse the domain discriminator, making the decoder result come from the target domain. 
+\noindent Yoo et al.\cite{yoo2016pixel} studied the domain transfer problem. They tried to achieve a domain transfer of clothes on semantic level. They build a three levels network. The first level is called convert, which is build by an encoder and a decoder. Encoder firstly extracts the low-level semantic information of a source picture, and the decoder decodes this information into another picture. Actually, the encoder is a convolutional neural network, and we will use the second and third level network to train the decoder. The second level is a real/fake discriminator and the third level is a domain discriminator. The decoder tried to confuse the real/fake discriminator, making the decoder result look natural and it tried to confuse the domain discriminator, making the decoder result come from the target domain. 
 
 \paragraph{PixelDA}~{}\\
 
@@ -208,7 +208,7 @@ Pixel-Level domain adaptation is usually combined with image generation or style
 
 \paragraph{CoGAN}~{}\\
 
-\noindent Coupled Generative Adversarial Networks\cite{liu2016coupled} was used to learn the joint distribution of multi-domain images. The method of CoGAN is simple, by training two GANs at the same time, and there are some layers shared between these GANs. In the generator, the first several layers shared the weight, and in the discriminator the last several layers shared the weight. From this paper's view, we could extract the invariant features, for example the object contour, and by the first several layers and in these private layers, we could get some detail information, such as texture. So the final loss function is the combine of these identical GAN's loss function, and the training method is as same as the DCGAN's \cite{radford2015unsupervised} training method. 
+\noindent Coupled Generative Adversarial Networks\cite{liu2016coupled} was used to learn the joint distribution of multi-domain images. The method of CoGAN is simple, by training two GANs at the same time, and there are some layers shared between these GANs. In the generator, the first several layers shared the weight, and in the discriminator the last several layers shared the weight. From this paper's view, we could extract the invariant features, for example the object contour, and by the first several shared layers. And in these private layers, we could get some detail information, such as texture. So the final loss function is the combination of these identical GAN's loss function, and the training method is as same as the DCGAN's \cite{radford2015unsupervised} training method. 
 
 \paragraph{pix2pix}~{}\\
 
@@ -216,7 +216,7 @@ Pixel-Level domain adaptation is usually combined with image generation or style
 
 \paragraph{CycleGAN}~{}\\
 
-\noindent No matter how impressive the pix2pix structure's result is, this framework is based on cGAN, which means the input images are paired. Zhu et al.\cite{zhu2017unpaired} used cycle-consistent adversarial network(CycleGAN) to finish an unpaired-image translation on pixel-level. When doing adversarial domain adaptation, usually we can not find the low level corresponding relationship. While CycleGAN adopts another generator, which tried to convert the generated picture into the source picture and add such cycle consistent loss into the loss function. Similarly, DiscoGAN\cite{kim2017learning}, DualGAN\cite{yi2017dualgan} were based on the same method. The only difference is DualGan change traditional GAN into Wasserstein GAN\cite{arjovsky2017wasserstein} to improve the stability and DiscoGAN chosse L2 for cycle consistency, while DualGan and CycleGAN choose L1 for cycle consistency. 
+\noindent No matter how impressive the pix2pix structure's result is, this framework is based on cGAN, which means the input images are paired. Zhu et al.\cite{zhu2017unpaired} used cycle-consistent adversarial network(CycleGAN) to finish an unpaired-image translation on pixel-level. When doing adversarial domain adaptation, usually we can not find the low level corresponding relationship. While CycleGAN adopts another generator, which tried to convert the generated picture back into the source picture and add such cycle consistent loss into the loss function. Similarly, DiscoGAN\cite{kim2017learning}, DualGAN\cite{yi2017dualgan} were based on the same method. The only difference is DualGan change traditional GAN into Wasserstein GAN\cite{arjovsky2017wasserstein} to improve the stability and DiscoGAN chosse L2 for cycle consistency, while DualGan and CycleGAN choose L1 for cycle consistency. 
 
 \paragraph{UNIT}~{}\\
 
@@ -228,7 +228,7 @@ Pixel-Level domain adaptation is usually combined with image generation or style
 
 \paragraph{StarGAN}~{}\\
 
-\noindent While their is still a big problem in CycleGAN and its variants: CycleGAN is only suitable for the two domain problem, when we are facing multi-domains question, we need to build a model for each two domain. Choi et al.\cite{choi2017stargan} seems find an approach to solve the multi-domain problem: StarGAN. The method behind StarGAN is simple, instead of finding a mapping function between each two domains, StarGAN tried to find a mapping function between each domain and a common domain. Also they use mask vector to build a uniform domain label space. To stabilize the training process and generate higher quality images, the authors chose Wasserstein GAN\cite{arjovsky2017wasserstein} instead of GAN. 
+\noindent While their is still a big problem in CycleGAN and its variants: CycleGAN is only suitable for the two domain problem, when we are facing multi-domains question, we need to build a model for each two domain. Choi et al.\cite{choi2017stargan} find an approach to solve the multi-domains problem: StarGAN. The method behind StarGAN is simple, instead of finding a mapping function between each two domains, StarGAN tried to find a mapping function between each domain and a common domain. Also they use mask vector to build a uniform domain label space. To stabilize the training process and generate higher quality images, the authors chose Wasserstein GAN\cite{arjovsky2017wasserstein} instead of GAN. 
 
 \paragraph{DTN}~{}\\
 
